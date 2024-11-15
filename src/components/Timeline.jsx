@@ -1,7 +1,7 @@
 import React from 'react'
 
 const Timeline = () => {
-    const data =[{position:'Pastor',name:'John Kuffor',desc:'The head of leadership and spirituality'},{position:'Presbyter',name:'Foster Appiah',desc:'The head of leadership and spirituality'},{position:'Session Clerk',name:'Peter Adu',desc:'The head of leadership and spirituality'},{position:'Catechist',name:'Daniel Obeng',desc:'The head of leadership and spirituality'},{position:'Treasure',name:'Ellen Kyei',desc:'The head of leadership and spirituality'}]
+    const data =[{position:'Agent-in-charge',name:'Cat. Augustine K. Arthur'},{position:'Senior Presbyeter',name:'Mr. Joseph Owusu Agymang'},{positon:'Session Clerk',name:'Samuel Baffour Appiah'}]
   return (
     <ul className="timeline timeline-snap-icon max-md:timeline-compact timeline-vertical">
   {
