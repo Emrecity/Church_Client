@@ -4,7 +4,7 @@ import {useForm} from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { addMemberSchema } from '../../../helpers/Schemas'
 import { apiResponseHandler } from '../../../helpers/ApiHandler'
-import { useMutation,QueryClient } from '@tanstack/react-query'
+import { useMutation,useQueryClient } from '@tanstack/react-query'
 import axios from 'axios'
 import toast from 'react-hot-toast'
 
@@ -13,6 +13,8 @@ const AddMemberModal = ({closeModal}) => {
          resolver: yupResolver(addMemberSchema)
     })
 
+const queryClient = useQueryClient()
+
 const {mutate,isPending} = useMutation({
     mutationKey: ['add_member'],
     mutationFn: async (data) => {
@@ -20,8 +22,8 @@ const {mutate,isPending} = useMutation({
         if(res?.status == 201){
             toast.success('Member Added Successfully')
             queryClient.refetchQueries({ queryKey: ['members'] })
-            reset()
             closeModal()
+            reset()
         }
         apiResponseHandler(res)
     }

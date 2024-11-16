@@ -2,10 +2,13 @@ import React, {useState} from 'react'
 import Breadcrumb from '../../../components/Breadcrumb'
 import AddMemberModal from './AddMemberModal'
 import { useModalActions } from '../../../components/ModalActions'
-import { useQuery } from '@tanstack/react-query'
+import { useMutation, useQuery,useQueryClient } from '@tanstack/react-query'
 import axios from 'axios'
 import { apiResponseHandler } from '../../../helpers/ApiHandler'
 import DataTable from "react-data-table-component"
+import DeleteButton from '../../../components/DeleteButton'
+import EditButton from '../../../components/EditButton'
+import toast from 'react-hot-toast'
 
 const Members = () => {
     const { open: openAddMemberModal, close: closeAddMemberModal} = useModalActions('add_member_modal')
@@ -14,6 +17,21 @@ const Members = () => {
         queryFn: async () => {
             const res = await axios.get('api/v1/member')
             if(res?.status == 200){
+                return res?.data?.data
+            }
+            apiResponseHandler(res)
+        }
+    })
+
+    const queryClient = useQueryClient()
+
+    const {mutate} = useMutation({
+        mutationFn: async (id) => {
+            console.log(id)
+            const res = await axios.delete(`api/v1/member/${id}`)
+            if(res?.status == 200){
+                toast.success('Member Deleted Successfully',1000)
+                queryClient.refetchQueries({ queryKey: ['members'] })
                 return res?.data?.data
             }
             apiResponseHandler(res)
@@ -80,8 +98,8 @@ const Members = () => {
           name: "Action",
           cell: (row) => {
             return (<>
-              <button className='btn-primary'>Edit</button>
-              <button>Delete</button>
+              <EditButton title="Edit" />
+              <DeleteButton handleClick={()=>mutate(row?._id)}/>
             </>)
           },
         },
