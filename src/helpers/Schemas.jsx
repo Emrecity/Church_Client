@@ -16,7 +16,19 @@ const addMemberSchema = yup.object({
     ageRange: yup.string().required("Age range is required"),
 })
 
+const addEventSchema = yup.object({
+    title: yup.string().required("Title is required"),
+    description: yup.string().required("Description is required"),
+    venue: yup.string().required("Venue is required"),
+    speaker: yup.string().required("Speaker is required"),
+    category: yup.string().required("Category is required"),
+    status: yup.string().required("Status is required"),
+    date: yup.string().required("Date is required"),
+    time: yup.string().required("Time is required"),
+})
+
 export{
     loginSchema,
-    addMemberSchema
+    addMemberSchema,
+    addEventSchema
 }
