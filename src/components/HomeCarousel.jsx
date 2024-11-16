@@ -52,7 +52,7 @@ const HomeCarousel = () => {
     }]
 
   return (
-    <>
+    <div className='my-2'>
       <Swiper
         spaceBetween={30}
         centeredSlides={true}
@@ -78,7 +78,7 @@ const HomeCarousel = () => {
           <span ref={progressContent}></span>
         </div>
       </Swiper>
-    </>
+    </div>
   )
 }
 
