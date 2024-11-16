@@ -94,6 +94,7 @@ const {mutate,isPending} = useMutation({
                 </div>
                 </div>
                 <Button btnText='Add Member' cssClass='btn-primary my-5'/>
+                <button className="w-full p-1 my-1 text-white bg-red-500" onClick={closeModal}>Close</button>
             </form>
         </div>
     </Modal>
