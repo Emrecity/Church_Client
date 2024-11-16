@@ -7,6 +7,7 @@ import Layout from './pages/dashboard/Layout'
 import MLayout from './pages/layout'
 import Members from './pages/dashboard/member/Members'
 import ManageEvent from './pages/dashboard/event/ManageEvent'
+import Main from './pages/dashboard/maindashboard/Main'
 
 function App() {
 
@@ -26,7 +27,7 @@ function App() {
         <Route path={routes.LOGIN} element={<Login/>}/>
         </Route>
         <Route element={<Layout/>}>
-          <Route path={routes.DASHBOARD} element={<div>Dashboard</div>}/>
+          <Route path={routes.DASHBOARD} element={<Main/>}/>
           <Route path={routes.MEMBERS} element={<Members/>}/>
           <Route path={routes.MANAGE_EVENT} element={<ManageEvent/>}/>
           <Route path={routes.EXECUTIVES} element={<div>Executives</div>}/>
