@@ -9,10 +9,10 @@ const CardDataStats = ({title,total,rate,children,}) => {
     
           <div className="flex items-end justify-between px-5 mt-4">
             <div>
-              <h4 className="font-bold text-black text-title-md dark:text-white">
+              <h4 className="text-4xl font-bold text-black dark:text-white">
                 {total}
               </h4>
-              <span className="text-sm font-medium">{title}</span>
+              <span className="text-lg font-medium">{title}</span>
             </div>
     
             <span
