@@ -81,6 +81,14 @@ const {mutate,isPending} = useMutation({
                     <option value='41+'>41+</option>
                     </select>
                 </div>
+                <div className="flex flex-col gap-y-2">
+                    <label>Status</label>
+                    <select className="form-control" {...register('status')}>
+                    <option>-select status-</option>
+                    <option value='active'>Active</option>
+                    <option value='inactive'>Inactive</option>
+                    </select>
+                </div>
                 </div>
                 <Button btnText='Add Member' cssClass='btn-primary my-5'/>
             </form>
