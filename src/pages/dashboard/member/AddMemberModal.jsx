@@ -1,15 +1,36 @@
 import Button from "../../../components/Button"
 import Modal from "../../../components/Modal"
-import MultiSelect from "../../../components/MultiSelect"
 import {useForm} from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { addMemberSchema } from '../../../helpers/Schemas'
+import { apiResponseHandler } from '../../../helpers/ApiHandler'
+import { useMutation } from '@tanstack/react-query'
+import axios from 'axios'
+import toast from 'react-hot-toast'
 
 const AddMemberModal = ({closeModal}) => {
-    const {register,handleSubmit,reset,formState:{isDirty}}= useForm()
+    const {register,handleSubmit,reset}= useForm({
+         resolver: yupResolver(addMemberSchema)
+    })
+
+const {mutate,isPending} = useMutation({
+    mutationKey: ['add_member'],
+    mutationFn: async (data) => {
+        const res = await axios.post('api/v1/member', data)
+        if(res?.status == 201){
+            toast.success('Member Added Successfully')
+            reset()
+            closeModal()
+        }
+        apiResponseHandler(res)
+    }
+})
+
   return (
     <Modal closeModal={closeModal} modal_id='add_member_modal'>
         <div className="p-5 overflow-hidden bg-white border rounded-sm border-stroke shadow-default dark:border-strokedark dark:bg-boxdark">
             <h1 className="text-2xl text-center text-blue-500 poppins-bold">New Member</h1>
-            <form  onSubmit={handleSubmit((data)=>console.log(data))}>
+            <form  onSubmit={handleSubmit((data)=>mutate(data))}>
             <div className="flex flex-col poppins-regular-italic gap-y-5">
                 <div className="flex flex-col gap-y-2">
                     <label>First Name</label>

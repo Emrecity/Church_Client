@@ -1,15 +1,33 @@
 import { Link,useNavigate } from "react-router-dom"
 import { routes } from "../helpers/routes"
 import { useForm } from "react-hook-form"
+import { yupResolver } from '@hookform/resolvers/yup'
+import { loginSchema } from '../helpers/Schemas'
+import axios from 'axios'
+import { useMutation } from '@tanstack/react-query'
+import { apiResponseHandler } from '../helpers/ApiHandler'
+import toast from "react-hot-toast"
 
 const Login = () => {
     const navigate = useNavigate()
-    const {register,handleSubmit,reset,formState:{isDirty}}= useForm()
+    const {register,handleSubmit,reset,formState:{isDirty}}= useForm({
+      resolver: yupResolver(loginSchema)
+    })
 
-    const login =(data)=>{
-        console.log(data)
-        navigate(routes.DASHBOARD)
-    }
+    const {mutate,isPending} = useMutation({
+      mutationFn: async (data) => {
+        const res = await axios.post('api/v1/user/login', data)
+        if(res?.status == 200){
+          toast.success('Login Successful')
+          navigate(routes.DASHBOARD)
+        }
+        apiResponseHandler(res)
+      }
+    })
+
+    // const login =(data)=>{
+    //     mutate(data)
+    // }
   return (
     <div className="border border-stroke bg-white rounded-md shadow-default w-full sm:w-[35%] p-5 mx-auto sm:mt-[10%]">
     <div className="border-b border-stroke py-4 px-6.5 dark:border-strokedark">
@@ -17,7 +35,7 @@ const Login = () => {
         Sign In Form
       </h3>
     </div>
-    <form onSubmit={handleSubmit(login)}>
+    <form onSubmit={handleSubmit((data)=>mutate(data))}>
       <div className="p-6.5">
         <div className="mb-4.5">
           <label className="mb-2.5 block text-black dark:text-white">
@@ -79,7 +97,7 @@ const Login = () => {
           </Link>
         </div>
 
-        <button type="submit" className="flex justify-center w-full p-3 my-3 font-medium bg-blue-500 rounded btn text-gray hover:bg-blue-600">
+        <button className="flex justify-center w-full p-3 my-3 font-medium bg-blue-500 rounded btn text-gray hover:bg-blue-600" disabled={isPending}>
           Sign In
         </button>
       </div>
