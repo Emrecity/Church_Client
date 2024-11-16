@@ -4,7 +4,7 @@ import {useForm} from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { addMemberSchema } from '../../../helpers/Schemas'
 import { apiResponseHandler } from '../../../helpers/ApiHandler'
-import { useMutation } from '@tanstack/react-query'
+import { useMutation,QueryClient } from '@tanstack/react-query'
 import axios from 'axios'
 import toast from 'react-hot-toast'
 
@@ -19,6 +19,7 @@ const {mutate,isPending} = useMutation({
         const res = await axios.post('api/v1/member', data)
         if(res?.status == 201){
             toast.success('Member Added Successfully')
+            queryClient.refetchQueries({ queryKey: ['members'] })
             reset()
             closeModal()
         }
