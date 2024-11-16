@@ -65,7 +65,7 @@ const Members = () => {
 
     const columns = [
         {
-          name: "First Name",
+          name: "Full Name",
           selector: (row) => `${row.firstname} ${row.lastname} ${row.othername}`,
           sortable: true
         },
