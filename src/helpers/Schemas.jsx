@@ -8,7 +8,7 @@ const loginSchema = yup.object({
 const addMemberSchema = yup.object({
     firstname: yup.string().required("First name is required"),
     lastname: yup.string().required("Last name is required"),
-    othername: yup.string().required("Other name is required"),
+    othername: yup.string(),
     phone: yup.string().required("Phone is required"),
     gender: yup.string().required("Gender is required"),
     role: yup.string().required("Role is required"),
