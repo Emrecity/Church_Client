@@ -14,7 +14,7 @@ function App() {
   axios.defaults.headers.common["Accept"] = "application/json";
   axios.defaults.headers.common["Content-Type"] = "application/json";
   // axios.defaults.headers.common["Authorization"] = `Bearer ${user_token}`;
-  axios.defaults.baseURL = `https://church-server-r5yy.vercel.app/`
+  axios.defaults.baseURL = `https://church-server-one.vercel.app/`
   // axios.defaults.baseURL = `http://localhost:3000/`
 
   return (
