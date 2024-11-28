@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import Breadcrumb from '../../../components/Breadcrumb'
 import AddMemberModal from './AddMemberModal'
+import EditMemberModal from './EditMemberModal'
 import { useModalActions } from '../../../components/ModalActions'
 import { useMutation, useQuery,useQueryClient } from '@tanstack/react-query'
 import axios from 'axios'
@@ -9,9 +10,11 @@ import DataTable from "react-data-table-component"
 import DeleteButton from '../../../components/DeleteButton'
 import EditButton from '../../../components/EditButton'
 import toast from 'react-hot-toast'
+import Swal from 'sweetalert2'
 
 const Members = () => {
     const { open: openAddMemberModal, close: closeAddMemberModal} = useModalActions('add_member_modal')
+    const { open: openEditMemberModal, close: closeEditMemberModal} = useModalActions('edit_member_modal')
     const {data,isLoading} = useQuery({
         queryKey: ['members'],
         queryFn: async () => {
@@ -28,6 +31,17 @@ const Members = () => {
     const {mutate} = useMutation({
         mutationFn: async (id) => {
             console.log(id)
+            const response = await Swal.fire({
+              title:'Are you sure ?',
+              text:'You will not be able to retrieve it back',
+              icon:'warning',
+              showDenyButton:true,
+              denyButtonColor:'#d33',
+              confirmButtonColor:'blue',
+              confirmButtonText:'Yes',
+              denyButtonText:'No'
+            })
+            if(response.isConfirmed){
             const res = await axios.delete(`api/v1/member/${id}`)
             if(res?.status == 200){
                 toast.success('Member Deleted Successfully',1000)
@@ -35,6 +49,8 @@ const Members = () => {
                 return res?.data?.data
             }
             apiResponseHandler(res)
+            }
+            
         }
     })
 
@@ -43,6 +59,7 @@ const Members = () => {
     const [gender, setGender] = useState('')
     const [status, setStatus] = useState('')
     const [datafilter, setFilter] = useState('')
+    const [update,setUpdate] = useState({})
 
     const list = data?.filter((item) => {
         if (ageRange != '') {
@@ -98,7 +115,21 @@ const Members = () => {
           name: "Action",
           cell: (row) => {
             return (<>
-              <EditButton title="Edit" />
+              <EditButton title="Edit" handleClick={()=>{
+                setUpdate({
+                  id:row._id,
+                  firstname:row.firstname,
+                  lastname:row.lastname,
+                  othername:row.lastname,
+                  image:row.image,
+                  dateOfBirth:row.dateOfBirth,
+                  phone:row.phone,
+                  gender:row.gender,
+                  role:row.role,
+                  status:row.status
+                })
+                openEditMemberModal()
+              }}/>
               <DeleteButton handleClick={()=>mutate(row?._id)}/>
             </>)
           },
@@ -168,6 +199,7 @@ const Members = () => {
             <input type='search' placeholder='Search...' className='w-full filter-control'value={datafilter} onChange={(e)=>{setFilter(e.target.value)}}/>
         </div>
         <AddMemberModal closeModal={closeAddMemberModal}/>
+        <EditMemberModal closeModal={closeEditMemberModal} data={update}/>
         <DataTable columns={columns} data={list} pagination />
     </div>
   )

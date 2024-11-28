@@ -14,6 +14,8 @@ const addMemberSchema = yup.object({
     role: yup.string().required("Role is required"),
     dateOfBirth: yup.string().required("Date of birth is required"),
     ageRange: yup.string().required("Age range is required"),
+    image: yup.mixed(),
+    status:yup.string().required("Status is required")
 })
 
 const addEventSchema = yup.object({
