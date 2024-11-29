@@ -4,10 +4,10 @@ import SeeMoreButton from './SeeMoreButton'
 const AboutUs = () => {
   return (
     <div className='p-5 my-5 '>
-        <h1 className='text-4xl text-blue-500 uppercase poppins-regular'>About Us</h1>
+        <h1 className='text-xl text-blue-500 uppercase sm:text-4xl poppins-regular'>About Us</h1>
         <div>
-            <h1 className='text-xl text-center text-blue-500 poppins-medium'>Brief History Of Presbyterian Church</h1>
-            <p className='text-center'>
+            <h1 className='text-center text-blue-500 tex-lg sm:text-xl poppins-medium'>Brief History Of Presbyterian Church</h1>
+            <p className='text-sm text-justify sm:text-center sm:text-base'>
             Big things have small beginnings”; so is The Presbyterian Church of Ghana. The First Missionaries were sent as a result of a request by Major de Richelieu, Governor of Christiansborg.
             The governor had observed the bad moral life of the Europeans in the fort. His request to the Danish Crown for missionaries was forwarded to the Basel Mission which had been set up in 1815 to train missionaries.Unfortunatly the first four missionaries died within a period of three years of arrival.
 

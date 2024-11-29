@@ -3,7 +3,7 @@ import React from 'react'
 const Timeline = () => {
     const data =[{position:'Agent-in-charge',name:'Cat. Augustine K. Arthur'},{position:'Senior Presbyeter',name:'Mr. Joseph Owusu Agyemang'},{position:'Session Clerk',name:'Samuel Baffour Appiah'}]
   return (
-    <ul className="timeline timeline-snap-icon max-md:timeline-compact timeline-vertical">
+    <ul className="sm:timeline sm:timeline-snap-icon max-md:timeline-compact timeline-vertical">
   {
     data.map((item,index)=>{
         return(
@@ -20,7 +20,7 @@ const Timeline = () => {
           clipRule="evenodd" />
       </svg>
     </div>
-    <div className={`mb-10 p-5 rounded-md space-y-5 bg-gradient-to-br ${index%2==0?"md:timeline-end from-slate-400 via-white to-blue-400":'timeline-start from-red-400 via-white to-blue-400'}`}>
+    <div className={`sm:mb-10 p-5 rounded-md sm:space-y-5 bg-gradient-to-br ${index%2==0?"md:timeline-end from-slate-400 via-white to-blue-400":'timeline-start from-red-400 via-white to-blue-400'}`}>
       <time className="font-mono italic">{item.position}</time>
       <div className="text-lg font-black">{item.name}</div>
       {item.desc}
