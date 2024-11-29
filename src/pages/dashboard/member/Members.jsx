@@ -126,6 +126,7 @@ const Members = () => {
                   phone:row.phone,
                   gender:row.gender,
                   role:row.role,
+                  ageRange:row.ageRange,
                   status:row.status
                 })
                 openEditMemberModal()

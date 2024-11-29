@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import Breadcrumb from '../../../components/Breadcrumb'
 import { useModalActions } from '../../../components/ModalActions'
 import AddEventModal from './AddEventModal'
+import EditEventModal from './EditEventModal'
 import { useQuery,useQueryClient,useMutation } from '@tanstack/react-query'
 import axios from 'axios'
 import { apiResponseHandler } from '../../../helpers/ApiHandler'
@@ -9,9 +10,11 @@ import DataTable from "react-data-table-component"
 import DeleteButton from '../../../components/DeleteButton'
 import EditButton from '../../../components/EditButton'
 import toast from 'react-hot-toast'
+import { set } from 'react-hook-form'
 
 const ManageEvent = () => {
     const { open: openAddEventModal, close: closeAddEventModal} = useModalActions('add_event_modal')
+    const { open: openEditEventModal, close: closeEditEventModal} = useModalActions('edit_event_modal')
 
     const {data,isLoading} = useQuery({
         queryKey: ['events'],
@@ -39,35 +42,40 @@ const ManageEvent = () => {
         }
     })
 
+    const [category, setCategory] = useState('')
+    const [status, setStatus] = useState('')
+    const [datafilter, setFilter] = useState('')
+    const [update,setUpdate] = useState({})
+
 
     const columns = [
         {
-          name: "title",
+          name: "Title",
           selector: (row) =>row.title,
           sortable: true
         },
         {
-          name: "venue",
+          name: "Venue",
           selector: (row) => row.venue,
           sortable: true
         },
         {
-          name: "speaker",
+          name: "Speaker",
           selector: (row) => row.speaker,
           sortable: true
         },
         {
-          name: "category",
+          name: "Category",
           selector: (row) => row.category,
           sortable: true
         },
         {
-          name: "status",
+          name: "Status",
           selector: (row) => row.status,
           sortable: true
         },
         {
-          name: "date",
+          name: "Date",
           selector: (row) => row.date,
           sortable: true
         },
@@ -75,16 +83,25 @@ const ManageEvent = () => {
           name: "Action",
           cell: (row) => {
             return (<>
-              <EditButton title="Edit" />
+              <EditButton title="Edit" handleClick={()=>{
+                setUpdate({
+                  id:row._id,
+                  title:row.title,
+                  description:row.description,
+                  venue:row.venue,
+                  speaker:row.speaker,
+                  category:row.category,
+                  status:row.status,
+                  date:row.date,
+                  time:row.time
+                })
+                openEditEventModal()
+              }}/>
               <DeleteButton handleClick={()=>mutate(row?._id)}/>
             </>)
           },
         },
       ]
-
-    const [category, setCategory] = useState('')
-    const [status, setStatus] = useState('')
-    const [datafilter, setFilter] = useState('')
 
     const list = data?.filter((item) => {
         if (category != '') {
@@ -131,6 +148,7 @@ const ManageEvent = () => {
             <input type='search' placeholder='Search...' className='w-full filter-control' value={datafilter} onChange={(e)=>{setFilter(e.target.value)}}/>
         </div>
         <AddEventModal closeModal={closeAddEventModal}/>
+        <EditEventModal closeModal={closeEditEventModal} data={update}/>
         <DataTable columns={columns} data={list} pagination />
     </div>
   )

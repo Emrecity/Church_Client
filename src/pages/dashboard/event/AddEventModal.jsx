@@ -80,7 +80,7 @@ const AddEventModal = ({closeModal}) => {
                 </div>
                 </div>
                 <Button btnText='Add Event' cssClass='btn-primary my-5'/>
-                <button className="w-full p-1 my-1 text-white bg-red-500 rounded-md" onClick={closeModal}>Close</button>
+                <button type="button" className="w-full p-1 my-1 text-white bg-red-500 rounded-md" onClick={closeModal}>Close</button>
             </form>
         </div>
     </Modal>

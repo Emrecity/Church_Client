@@ -18,6 +18,19 @@ const addMemberSchema = yup.object({
     status:yup.string().required("Status is required")
 })
 
+const EditMemberSchema = yup.object({
+    firstname: yup.string(),
+    lastname: yup.string(),
+    othername: yup.string(),
+    phone: yup.string(),
+    gender: yup.string(),
+    role: yup.string(),
+    dateOfBirth: yup.string(),
+    ageRange: yup.string(),
+    image: yup.mixed(),
+    status:yup.string()
+})
+
 const addEventSchema = yup.object({
     title: yup.string().required("Title is required"),
     description: yup.string().required("Description is required"),
@@ -29,8 +42,21 @@ const addEventSchema = yup.object({
     time: yup.string().required("Time is required"),
 })
 
+const editEventSchema = yup.object({
+    title: yup.string(),
+    description: yup.string(),
+    venue: yup.string(),
+    speaker: yup.string(),
+    category: yup.string(),
+    status: yup.string(),
+    date: yup.string(),
+    time: yup.string(),
+})
+
 export{
     loginSchema,
     addMemberSchema,
-    addEventSchema
+    addEventSchema,
+    EditMemberSchema,
+    editEventSchema
 }
