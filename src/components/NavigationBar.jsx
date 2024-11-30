@@ -26,7 +26,7 @@ const NavigationBar = () => {
         tabIndex={0}
         className="menu menu-sm dropdown-content bg-blue-300 rounded-box z-[1] mt-3 w-52 p-2 shadow">
         <li className='hover:bg-blue-500 hover:rounded'><Link to={routes.HOME}>Home</Link></li>
-        <li className='hover:bg-blue-500 hover:rounded'><Link to={routes.MANAGE_EVENT}>Events</Link></li>
+        <li className='hover:bg-blue-500 hover:rounded'><Link to={routes.EVENT}>Events</Link></li>
         {/* <li className='hover:bg-blue-500 hover:rounded'><a>Quotes</a></li>
         <li className='hover:bg-blue-500 hover:rounded'><a>About Us</a></li>
         <li className='hover:bg-blue-500 hover:rounded'><a>Contact Us</a></li> */}
