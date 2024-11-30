@@ -26,7 +26,7 @@ function App() {
         <Route path={routes.HOME} element={<Home/>}/>
         <Route path={routes.ABOUT} element={<div>About</div>}/>
         <Route path={routes.GALLERY} element={<div>Gallery</div>}/>
-        <Route path={routes.EVENT} element={<Events/>}/> 
+        {/* <Route path={routes.EVENT} element={<Events/>}/>  */}
         <Route path={routes.LOGIN} element={<Login/>}/>
         </Route>
         <Route element={<Layout/>}>
