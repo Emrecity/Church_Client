@@ -9,7 +9,7 @@ import Members from './pages/dashboard/member/Members'
 import ManageEvent from './pages/dashboard/event/ManageEvent'
 import Main from './pages/dashboard/maindashboard/Main'
 import NotFound from './pages/NotFound'
-import Events from './Events'
+import Events from './pages/Events'
 
 function App() {
 
