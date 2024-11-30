@@ -9,6 +9,7 @@ import Members from './pages/dashboard/member/Members'
 import ManageEvent from './pages/dashboard/event/ManageEvent'
 import Main from './pages/dashboard/maindashboard/Main'
 import NotFound from './pages/NotFound'
+import Events from './Events'
 
 function App() {
 
@@ -25,7 +26,7 @@ function App() {
         <Route path={routes.HOME} element={<Home/>}/>
         <Route path={routes.ABOUT} element={<div>About</div>}/>
         <Route path={routes.GALLERY} element={<div>Gallery</div>}/>
-        <Route path={routes.EVENT} element={<div>Events</div>}/> 
+        <Route path={routes.EVENT} element={<Events/>}/> 
         <Route path={routes.LOGIN} element={<Login/>}/>
         </Route>
         <Route element={<Layout/>}>
