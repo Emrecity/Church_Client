@@ -1,6 +1,6 @@
 import React from 'react'
 import { routes } from '../helpers/routes'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 
 const NavigationBar = () => {
   const navigate = useNavigate()
@@ -25,8 +25,8 @@ const NavigationBar = () => {
       <ul
         tabIndex={0}
         className="menu menu-sm dropdown-content bg-blue-300 rounded-box z-[1] mt-3 w-52 p-2 shadow">
-        <li className='hover:bg-blue-500 hover:rounded'><a href={routes.HOME}>Home</a></li>
-        <li className='hover:bg-blue-500 hover:rounded'><a href={routes.MANAGE_EVENT}>Events</a></li>
+        <li className='hover:bg-blue-500 hover:rounded'><Link to={routes.HOME}>Home</Link></li>
+        <li className='hover:bg-blue-500 hover:rounded'><Link to={routes.MANAGE_EVENT}>Events</Link></li>
         {/* <li className='hover:bg-blue-500 hover:rounded'><a>Quotes</a></li>
         <li className='hover:bg-blue-500 hover:rounded'><a>About Us</a></li>
         <li className='hover:bg-blue-500 hover:rounded'><a>Contact Us</a></li> */}
