@@ -9,4 +9,5 @@ export const routes = {
     EXECUTIVES:'/dashboard/executives',
     SMS:'/dashboard/sms',
     MANAGE_EVENT:'/dashboard/manage_event',
+    NOT_FOUND:'*'
 }

@@ -8,6 +8,7 @@ import MLayout from './pages/layout'
 import Members from './pages/dashboard/member/Members'
 import ManageEvent from './pages/dashboard/event/ManageEvent'
 import Main from './pages/dashboard/maindashboard/Main'
+import NotFound from './pages/NotFound'
 
 function App() {
 
@@ -34,6 +35,7 @@ function App() {
           <Route path={routes.EXECUTIVES} element={<div>Executives</div>}/>
           <Route path={routes.SMS} element={<div>SMS Notifications</div>}/>
         </Route>
+        <Route path={routes.NOT_FOUND} element={<NotFound/>}/>
       </Routes>
     </>
   )
