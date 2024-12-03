@@ -1,71 +1,32 @@
-import { Link,useNavigate } from "react-router-dom"
-import { routes } from "../helpers/routes"
-import { useForm } from "react-hook-form"
-import { yupResolver } from '@hookform/resolvers/yup'
-import { loginSchema } from '../helpers/Schemas'
-import axios from 'axios'
-import { useMutation } from '@tanstack/react-query'
-import { apiResponseHandler } from '../helpers/ApiHandler'
-import toast from "react-hot-toast"
-import { useState } from "react"
-import MembersLoginForm from "../components/MembersLoginForm"
+import React from 'react'
+import { Link } from 'react-router-dom'
 
-const Login = () => {
-    const navigate = useNavigate()
-    const {register,handleSubmit,reset,formState:{isDirty}}= useForm({
-      resolver: yupResolver(loginSchema)
-    })
+const MembersLoginForm = () => {
 
-    const {mutate,isPending} = useMutation({
-      mutationFn: async (data) => {
-        const res = await axios.post('api/v1/user/login', data)
-        if(res?.status == 200){
-          toast.success('Login Successful')
-          navigate(routes.DASHBOARD)
-        }
-        apiResponseHandler(res)
-      }
-    })
-
-    const [isExecutive,setIsExecutive] = useState(true)
-
-    // const login =(data)=>{
-    //     mutate(data)
-    // }
   return (
-    <div className="border border-stroke bg-white rounded-md shadow-default w-full sm:w-[35%] p-5 mx-auto sm:mt-[10%]">
-    <div className="border-b border-stroke py-4 px-6.5 dark:border-strokedark">
-      <h3 className="font-medium text-center text-black dark:text-white">
-        {isExecutive ? 'Executive' : 'Member'} Login Form
-      </h3>
-    </div>
-    <div className="flex justify-center my-3 gap-x-5 sm:text-lg">
-      <button onClick={()=>setIsExecutive(true)} className=" hover:underline hover:text-blue-500">Executive</button>
-      <button onClick={()=>setIsExecutive(false)} className=" hover:underline hover:text-blue-500">Member</button>
-    </div>
-    {isExecutive ? <form onSubmit={handleSubmit((data)=>mutate(data))}>
+    <form >
       <div className="p-6.5">
         <div className="mb-4.5">
           <label className="mb-2.5 block text-black dark:text-white">
-            Email
+            First Name
           </label>
           <input
-            type="email"
-            placeholder="Enter your email address"
+            type="text"
+            placeholder="Enter your firstname"
             className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
-            {...register('email')}
+            // {...register('email')}
           />
         </div>
 
         <div className="my-5">
           <label className="mb-2.5 block text-black dark:text-white">
-            Password
+            Phone Number
           </label>
           <input
-            type="password"
-            placeholder="Enter password"
+            type="tel"
+            placeholder="Enter your phone number"
             className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
-            {...register('password')}
+            // {...register('password')}
           />
         </div>
 
@@ -105,13 +66,12 @@ const Login = () => {
           </Link>
         </div>
 
-        <button className="flex justify-center w-full p-3 my-3 font-medium bg-blue-500 rounded btn text-gray hover:bg-blue-600" disabled={isPending}>
+        <button className="flex justify-center w-full p-3 my-3 font-medium bg-blue-500 rounded btn text-gray hover:bg-blue-600" disabled={false}>
           Sign In
         </button>
       </div>
-    </form>:<MembersLoginForm/>}
-  </div>
+    </form>
   )
 }
 
-export default Login
+export default MembersLoginForm
