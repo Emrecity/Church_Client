@@ -36,11 +36,11 @@ const Login = () => {
     <div className="border border-stroke bg-white rounded-md shadow-default w-full sm:w-[35%] p-5 mx-auto sm:mt-[10%]">
     <div className="border-b border-stroke py-4 px-6.5 dark:border-strokedark">
       <h3 className="text-xl font-medium text-center text-blue-500 dark:text-white">
-        {isExecutive ? 'Executive' : 'Member'} Login Form
+        {isExecutive ? 'Admin' : 'Member'} Login Form
       </h3>
     </div>
     <div className="flex justify-center my-3 gap-x-5">
-      <button onClick={()=>setIsExecutive(true)} className=" hover:underline hover:text-blue-500">Executive</button>
+      <button onClick={()=>setIsExecutive(true)} className=" hover:underline hover:text-blue-500">Admin</button>
       <button onClick={()=>setIsExecutive(false)} className=" hover:underline hover:text-blue-500">Member</button>
     </div>
     {isExecutive ? <form onSubmit={handleSubmit((data)=>mutate(data))}>
