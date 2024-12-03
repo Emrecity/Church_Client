@@ -49,6 +49,21 @@ const HomeCarousel = () => {
         title: 'Home',
         description: 'Welcome to the Church System',
         imageUrl: 'carouselImage7.jpg'
+    },
+    {
+        title: 'Home',
+        description: 'Welcome to the Church System',
+        imageUrl: 'carouselImage8.jpg'
+    },
+    {
+        title: 'Home',
+        description: 'Welcome to the Church System',
+        imageUrl: 'carouselImage9.jpg'
+    },
+    {
+        title: 'Home',
+        description: 'Welcome to the Church System',
+        imageUrl: 'carouselImage10.jpg'
     }]
 
   return (
