@@ -22,7 +22,7 @@ const MembersLoginForm = () => {
         navigate(routes.DASHBOARD)
       }
       if(res?.status == 400){
-        toast.error(res?.message)
+        toast.error('Login Failed')
       }
       apiResponseHandler(res)
     }
