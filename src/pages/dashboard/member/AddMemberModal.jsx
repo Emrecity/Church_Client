@@ -126,7 +126,7 @@ const handleClose =()=>{
                     <small className="text-red-300">{errors.gender?.message}</small>
                 </div>
                 <div className="flex flex-col gap-y-2">
-                    <label>Gender</label>
+                  <label>Is Communicant</label>
                     <select className="form-control" {...register('communicant')}>
                         <option value='yes'>Yes</option>
                         <option value='no'>No</option>
