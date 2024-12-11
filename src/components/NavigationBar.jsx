@@ -4,7 +4,8 @@ import { useNavigate, Link } from 'react-router-dom'
 
 const NavigationBar = () => {
   const navigate = useNavigate()
-  const [toggle, setToggle] = useState(true)
+  const [toggle, setToggle] = useState(false)
+  const [show, setShow] = useState(true)
   const id = localStorage.getItem('id')
   return (
 <div className="sticky top-0 z-10 text-white bg-blue-500 navbar">
@@ -39,14 +40,14 @@ const NavigationBar = () => {
     <a className="text-xl btn btn-ghost">Presbyterian Church Of Ghana</a>
   </div>
   <div className="navbar-end">
-    {(!toggle && !id) && <button onClick={()=>navigate(routes.LOGIN)} className="btn-secondary">
+    {(!toggle  && show) && <button onClick={()=>navigate(routes.LOGIN)} className="btn-secondary">
       Login
     </button>}
-    { (toggle && localStorage.getItem('id')) && <button onClick={()=>{
+    { (localStorage.getItem('id') && !toggle && show) && <button onClick={()=>{
       localStorage.clear()
       setToggle(false)
-      navigate(routes.LOGIN)
-      }} className="btn-secondary">
+      navigate(routes.HOME)
+      }} className="mx-5 btn-secondary">
       Logout
     </button>}
   </div>
