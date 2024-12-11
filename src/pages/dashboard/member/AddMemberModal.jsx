@@ -125,6 +125,14 @@ const handleClose =()=>{
                     </select>
                     <small className="text-red-300">{errors.gender?.message}</small>
                 </div>
+                <div className="flex flex-col gap-y-2">
+                    <label>Gender</label>
+                    <select className="form-control" {...register('communicant')}>
+                        <option value='yes'>Yes</option>
+                        <option value='no'>No</option>
+                    </select>
+                    <small className="text-red-300">{errors.communicant?.message}</small>
+                </div>
                 <div className="flex flex-col col-span-2">
                     <label>Role</label>
                     <select className="form-control" {...register('role')}>
