@@ -155,6 +155,15 @@ useEffect(()=>{
                     <small className="text-red-300">{errors.gender?.message}</small>
             </div>
             <div className="flex flex-col gap-y-2">
+                    <label>Is Communicant</label>
+                    <select className="form-control" {...register('communicant')}>
+                        <option value={data?.communicant}>{data?.communicant}</option>
+                        <option value='no'>No</option>
+                        <option value='yes'>Yes</option>
+                    </select>
+                    <small className="text-red-300">{errors.gender?.message}</small>
+            </div>
+            <div className="flex flex-col gap-y-2">
                     <label>Role</label>
                     <select className="form-control" {...register('role')}>
                         <option value={data?.role}>{data?.role}</option>

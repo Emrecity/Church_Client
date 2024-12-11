@@ -125,6 +125,7 @@ const Members = () => {
                   dateOfBirth:row.dateOfBirth,
                   phone:row.phone,
                   gender:row.gender,
+                  communicant:row.communicant,
                   role:row.role,
                   ageRange:row.ageRange,
                   status:row.status
