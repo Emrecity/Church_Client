@@ -1,10 +1,32 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { useForm } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { MemberLoginSchema } from '../helpers/Schemas'
+import axios from 'axios'
+import { useMutation } from '@tanstack/react-query'
+import { apiResponseHandler } from '../helpers/ApiHandler'
+import toast from 'react-hot-toast'
 
 const MembersLoginForm = () => {
 
+  const {register,handleSubmit,reset,formState:{isDirty}}= useForm({
+    resolver: yupResolver(MemberLoginSchema)
+  })
+
+  const {mutate,isPending} = useMutation({
+    mutationFn: async (data) => {
+      const res = await axios.post('/api/v1/member/login', data)
+      if(res?.status == 200){
+        toast.success('Login Successful')
+        navigate(routes.DASHBOARD)
+      }
+      apiResponseHandler(res)
+    }
+  })
+
   return (
-    <form >
+    <form onSubmit={handleSubmit((data)=>console.log(data))}>
       <div className="p-6.5">
         <div className="mb-4.5">
           <label className="mb-2.5 block text-black dark:text-white">
@@ -14,7 +36,7 @@ const MembersLoginForm = () => {
             type="text"
             placeholder="Enter your firstname"
             className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
-            // {...register('email')}
+            {...register('firstname')}
           />
         </div>
 
@@ -26,7 +48,7 @@ const MembersLoginForm = () => {
             type="tel"
             placeholder="Enter your phone number"
             className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
-            // {...register('password')}
+            {...register('phone')}
           />
         </div>
 

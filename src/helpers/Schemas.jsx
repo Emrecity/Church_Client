@@ -5,6 +5,11 @@ const loginSchema = yup.object({
     password: yup.string().required("Password is required"),
 })
 
+const MemberLoginSchema = yup.object({
+    firstname: yup.string().required("First name is required"),
+    phone: yup.string().required("Phone is required"),
+})
+
 const addMemberSchema = yup.object({
     firstname: yup.string().required("First name is required"),
     lastname: yup.string().required("Last name is required"),
@@ -58,5 +63,6 @@ export{
     addMemberSchema,
     addEventSchema,
     EditMemberSchema,
-    editEventSchema
+    editEventSchema,
+    MemberLoginSchema
 }
