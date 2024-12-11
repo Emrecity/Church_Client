@@ -1,9 +1,11 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { routes } from '../helpers/routes'
 import { useNavigate, Link } from 'react-router-dom'
 
 const NavigationBar = () => {
   const navigate = useNavigate()
+  const [toggle, setToggle] = useState(true)
+  const id = localStorage.getItem('id')
   return (
 <div className="sticky top-0 z-10 text-white bg-blue-500 navbar">
   <div className="navbar-start">
@@ -37,9 +39,16 @@ const NavigationBar = () => {
     <a className="text-xl btn btn-ghost">Presbyterian Church Of Ghana</a>
   </div>
   <div className="navbar-end">
-    <button onClick={()=>navigate(routes.LOGIN)} className="btn-secondary">
+    {!toggle && <button onClick={()=>navigate(routes.LOGIN)} className="btn-secondary">
       Login
-    </button>
+    </button>}
+    { toggle && <button onClick={()=>{
+      localStorage.clear()
+      setToggle(false)
+      navigate(routes.LOGIN)
+      }} className="btn-secondary">
+      Logout
+    </button>}
   </div>
 </div>
   )

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { MemberLoginSchema } from '../helpers/Schemas'
@@ -7,8 +7,11 @@ import axios from 'axios'
 import { useMutation } from '@tanstack/react-query'
 import { apiResponseHandler } from '../helpers/ApiHandler'
 import toast from 'react-hot-toast'
+import { routes } from '../helpers/routes'
 
 const MembersLoginForm = () => {
+
+  const navigate = useNavigate()
 
   const {register,handleSubmit,reset,formState:{isDirty}}= useForm({
     resolver: yupResolver(MemberLoginSchema)
@@ -19,10 +22,11 @@ const MembersLoginForm = () => {
       const res = await axios.post('/api/v1/member/login', data)
       if(res?.status == 200){
         toast.success('Login Successful')
-        navigate(routes.DASHBOARD)
+        localStorage.setItem('id',res.data.data._id)
+        navigate(routes.MEMBER_DASHBOARD)
       }
       if(res?.status == 400){
-        toast('Login Failed')
+        toast.error('Login Failed')
       }
       apiResponseHandler(res)
     }

@@ -4,6 +4,7 @@ export const routes = {
     GALLERY: '/gallery',
     EVENT:'/event',
     LOGIN:'/login',
+    MEMBER_DASHBOARD:'/member-dashboard',
     DASHBOARD:'/dashboard',
     MEMBERS:'/dashboard/members',
     EXECUTIVES:'/dashboard/executives',
