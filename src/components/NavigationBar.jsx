@@ -40,16 +40,9 @@ const NavigationBar = () => {
     <a className="text-xl btn btn-ghost">Presbyterian Church Of Ghana</a>
   </div>
   <div className="navbar-end">
-    {(!toggle  && show) && <button onClick={()=>navigate(routes.LOGIN)} className="btn-secondary">
+     <button onClick={()=>navigate(routes.LOGIN)} className="btn-secondary">
       Login
-    </button>}
-    { (localStorage.getItem('id') && !toggle && show) && <button onClick={()=>{
-      localStorage.clear()
-      setToggle(false)
-      navigate(routes.HOME)
-      }} className="mx-5 btn-secondary">
-      Logout
-    </button>}
+    </button>
   </div>
 </div>
   )
