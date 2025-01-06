@@ -69,7 +69,7 @@ const Members = () => {
             return item.role.includes(role)
         }
         if (gender != '') {
-            return item.gender.includes(gender)
+            return item.gender == gender
         }
         if (status != '') {
             return item.status.includes(status)
