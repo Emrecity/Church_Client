@@ -58,6 +58,7 @@ const Members = () => {
     const [role, setRole] = useState('')
     const [gender, setGender] = useState('')
     const [status, setStatus] = useState('')
+    const [communicant, setCommunicant] = useState('')
     const [datafilter, setFilter] = useState('')
     const [update,setUpdate] = useState({})
 
@@ -73,6 +74,9 @@ const Members = () => {
         }
         if (status != '') {
             return item.status.includes(status)
+        }
+        if(communicant){
+          return item.communicant == communicant
         }
         if (datafilter != '') {
           return item.firstname.toLowerCase().includes(datafilter) || item.lastname.toLowerCase().includes(datafilter)
@@ -145,14 +149,15 @@ const Members = () => {
             <h1>List of Members</h1>
             <button onClick={()=>openAddMemberModal()}  className='btn-primary'>Add Member</button>
         </div>
-        <div className='flex flex-col justify-center gap-5 my-5 sm:flex-row poppins-meduim'>
-            <h1 className='mt-2 font-bold'>Filters</h1>
+        <div className='grid justify-center gap-5 my-5 sm:grid-cols-4 sm:flex-row poppins-meduim'>
+            <h1 className='my-2 font-bold'>Filters</h1>
             <select className='filter-control' value={ageRange} onChange={(e)=>{
                 setAgeRange(e.target.value)
                 setFilter('')
                 setGender('')
                 setStatus('')
                 setRole('')
+                setCommunicant('')
                 }}>
                 <option value=''>--select age--</option>
                 <option value='0-12'>0-12</option>
@@ -167,6 +172,7 @@ const Members = () => {
                 setGender('')
                 setStatus('')
                 setAgeRange('')
+                setCommunicant('')
                 }}>
                 <option value=' '>--select role--</option>
                 <option value='member'>Member</option>
@@ -183,6 +189,7 @@ const Members = () => {
                 setAgeRange('')
                 setStatus('')
                 setRole('')
+                setCommunicant('')
                 }}>
                 <option value=''>--select gender--</option>
                 <option value='male'>male</option>
@@ -193,12 +200,24 @@ const Members = () => {
                 setFilter('')
                 setGender('')
                 setAgeRange('')
+                setCommunicant('')
                 }}>
                 <option value=''>--select status--</option>
                 <option value='active'>Active</option>
                 <option value='inactive'>Inactive</option>
             </select>
-            <input type='search' placeholder='Search...' className='w-full filter-control'value={datafilter} onChange={(e)=>{setFilter(e.target.value)}}/>
+            <select className='filter-control' value={communicant} onChange={(e)=>{
+                setCommunicant(e.target.value)
+                setFilter('')
+                setGender('')
+                setAgeRange('')
+                setStatus('')
+                }}>
+                <option value=''>--select communicant--</option>
+                <option value='yes'>Communicant</option>
+                <option value='no'>Non-Communicant</option>
+            </select>
+            <input type='search' placeholder='Search...' className='w-full sm:col-span-2 filter-control'value={datafilter} onChange={(e)=>{setFilter(e.target.value)}}/>
         </div>
         <AddMemberModal closeModal={closeAddMemberModal}/>
         <EditMemberModal closeModal={closeEditMemberModal} data={update}/>
